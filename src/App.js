@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+      <Header />
+      <Table />
+    </>
+  );
+}
+
+function Header() {
+  return (
+    <header>
+      <h1 className="header-title">CRACK THE CODE</h1>
+    </header>
+  );
+}
+
+function BlockInput({ onSetHowMany }) {
+  return (
+    <div className="block-input">
+      <input type="number" onChange={onSetHowMany} />
     </div>
   );
 }
 
-export default App;
+function TableRow({ isActive }) {
+  const [howMany, setHowMany] = useState(0);
+  const [allFilled, setAllFilled] = useState(false);
+  function onSetHowMany() {
+    if (howMany === 4) {
+      console.log(howMany);
+      setAllFilled(true);
+    } else {
+      setHowMany((howMany) => howMany + 1);
+      console.log(howMany);
+    }
+  }
+  return (
+    <div className={isActive ? "table-row" : "table-row not-active"}>
+      <BlockInput onSetHowMany={onSetHowMany} />
+      <BlockInput onSetHowMany={onSetHowMany} />
+      <BlockInput onSetHowMany={onSetHowMany} />
+      <BlockInput onSetHowMany={onSetHowMany} />
+    </div>
+  );
+}
+
+function Table() {
+  const [isActiveNum, setIsActiveNum] = useState(1);
+
+  return (
+    <div className="table">
+      <TableRow isActive={isActiveNum === 1 ? true : false} />
+      <TableRow isActive={isActiveNum === 2 ? true : false} />
+      <TableRow isActive={isActiveNum === 3 ? true : false} />
+      <TableRow isActive={isActiveNum === 4 ? true : false} />
+      <TableRow isActive={isActiveNum === 5 ? true : false} />
+    </div>
+  );
+}
