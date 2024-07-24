@@ -17,32 +17,30 @@ function Header() {
   );
 }
 
-function BlockInput({ onSetHowMany }) {
+function BlockInput() {
+  const [value, setValue] = useState("");
   return (
     <div className="block-input">
-      <input type="number" onChange={onSetHowMany} />
+      <input
+        type="number"
+        maxLength="1"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
     </div>
   );
 }
 
 function TableRow({ isActive }) {
-  const [howMany, setHowMany] = useState(0);
-  const [allFilled, setAllFilled] = useState(false);
-  function onSetHowMany() {
-    if (howMany === 4) {
-      console.log(howMany);
-      setAllFilled(true);
-    } else {
-      setHowMany((howMany) => howMany + 1);
-      console.log(howMany);
-    }
-  }
+  const [numbers, setNumbers] = useState(0);
+  // spróbować jednak jako string a nie int
+
   return (
     <div className={isActive ? "table-row" : "table-row not-active"}>
-      <BlockInput onSetHowMany={onSetHowMany} />
-      <BlockInput onSetHowMany={onSetHowMany} />
-      <BlockInput onSetHowMany={onSetHowMany} />
-      <BlockInput onSetHowMany={onSetHowMany} />
+      <BlockInput />
+      <BlockInput />
+      <BlockInput />
+      <BlockInput />
     </div>
   );
 }
