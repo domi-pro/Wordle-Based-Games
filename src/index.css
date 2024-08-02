@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;700&family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap");
 
 body {
   margin: 0;
@@ -6,6 +7,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f0ece5;
+}
+
+input[type="number"] {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+select {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
 }
 
 header {
@@ -20,13 +35,47 @@ header {
   color: #b6bbc4;
 }
 
+.summary-background {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.summary {
+  background: white;
+  border-radius: 15px;
+  width: 20%;
+  margin: 20% auto;
+  padding: 20px; /* added padding for better appearance */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* added shadow for better distinction */
+  opacity: 1; /* Ensure it's fully opaque */
+  transform: translateY(-100px); /* Initial position above the view */
+  transition: transform 0.5s ease-in;
+}
+
+.summary.show {
+  transform: translateY(0); /* Final position */
+}
+
+.settings {
+  display: flex;
+  width: 20%;
+  margin: 5% auto;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .table {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   max-width: 40%;
-  margin: 10% 30%;
+  margin: 5% auto;
 }
 
 .table-row {
