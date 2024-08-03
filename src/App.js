@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useEffect, useRef } from "react";
+import { useKey } from "./useKey";
 
 export default function App() {
-  const [codeLength, setCodeLength] = useState(4);
+  const [codeLength, setCodeLength] = useState(null);
   const [win, setWin] = useState(null);
   const [loss, setLoss] = useState(false);
   const howManyRows = 6;
@@ -18,7 +19,7 @@ export default function App() {
       <Header />
       {(win || loss) && <Summary win={win} loss={loss} />}
       <Settings codeLength={codeLength} setCodeLength={setCodeLength} />
-      <RestartButton handleRestart={handleRestart} />
+      {codeLength && <RestartButton handleRestart={handleRestart} />}
       <Table
         codeLength={codeLength}
         setWin={setWin}
@@ -204,16 +205,31 @@ function TableRow({
     code,
     howManyRows,
   ]);
+
   useEffect(() => {
     if (inputsRef.current[0]) {
       inputsRef.current[0].focus();
     }
   }, [isActive]);
+
   useEffect(() => {
     setRowOutput(() => "X".repeat(length));
     setRightSpot(() => () => Array.from({ length }, () => null));
     setNotRightSpot(() => () => Array.from({ length }, () => null));
   }, [length]);
+
+  function focusNextInput(index) {
+    if (index < length - 1) {
+      inputsRef.current[index + 1].focus();
+    }
+  }
+
+  function focusPreviousInput(index) {
+    if (index >= 0) {
+      inputsRef.current[index].focus();
+    }
+  }
+
   function handleChangeOutput(index, newValue) {
     if (newValue !== "") {
       setRowOutput(
@@ -239,6 +255,8 @@ function TableRow({
           isActive={isActive}
           inputRef={(el) => (inputsRef.current[index] = el)}
           rowOutput={rowOutput}
+          focusPreviousInput={focusPreviousInput}
+          focusNextInput={focusNextInput}
         />
       ))}
     </div>
@@ -253,15 +271,40 @@ function BlockInput({
   isActive,
   inputRef,
   rowOutput,
+  focusNextInput,
+  focusPreviousInput,
 }) {
   const [value, setValue] = useState("");
   useEffect(() => {
     if (rowOutput[index] === "X") setValue("");
   }, [rowOutput, index]);
+
+  useKey("Backspace", (event) => {
+    if (isActive && value !== "") {
+      console.log(index);
+      focusPreviousInput(index);
+    }
+  });
+
   function handleChange(e) {
-    if (e.target.value.length > 1) return false;
-    setValue(e.target.value);
-    onChangeValue(index, e.target.value);
+    const newChar = e.target.value;
+    let newValue = "";
+    if (newChar[0] === value) {
+      newValue = e.target.value.slice(-1);
+    } else {
+      newValue = e.target.value.charAt(0);
+    }
+    setValue(newValue);
+    onChangeValue(index, newValue);
+    if (newValue) {
+      focusNextInput(index);
+    }
+  }
+  function handleFocus() {
+    if (inputRef.current) {
+      const length = inputRef.current.value.length;
+      inputRef.current.setSelectionRange(length, length);
+    }
   }
   return (
     <div
@@ -278,6 +321,7 @@ function BlockInput({
         type="number"
         value={value}
         onChange={(e) => handleChange(e)}
+        onFocus={handleFocus}
         disabled={!isActive}
         ref={inputRef}
         autoFocus={true}
