@@ -25,6 +25,7 @@ select {
 
 header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #31304d;
@@ -35,7 +36,13 @@ header {
   color: #b6bbc4;
 }
 
+.header-subtitle {
+  color: #b6bbc4;
+  margin-top: 0;
+}
+
 .summary-background {
+  display: block;
   font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
@@ -61,12 +68,24 @@ header {
   transform: translateY(0); /* Final position */
 }
 
+.summary-background.hide {
+  display: none;
+}
+
 .settings {
   display: flex;
   width: 20%;
   margin: 5% auto;
   justify-content: space-around;
   align-items: center;
+}
+
+.restart-button {
+  background: #31304d;
+  color: #b6bbc4;
+  outline: none;
+  display: flex;
+  margin: auto;
 }
 
 .table {
