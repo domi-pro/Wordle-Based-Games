@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;700&family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Pixelify+Sans:wght@400..700&family=VT323&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Pixelify Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f0ece5;
+}
+
+input[type="number"] {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+select {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #31304d;
+}
+
+.header-title {
+  font-size: 50px;
+  color: #b6bbc4;
+}
+
+.header-subtitle {
+  color: #b6bbc4;
+  margin-top: 0;
+}
+
+.summary-background {
+  display: block;
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+  position: absolute;
+  width: 100%;
+  height: 100vw;
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.summary {
+  background: white;
+  border-radius: 15px;
+  width: 20%;
+  margin: 20% auto;
+  padding: 20px; /* added padding for better appearance */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* added shadow for better distinction */
+  opacity: 1; /* Ensure it's fully opaque */
+  transform: translateY(-100px); /* Initial position above the view */
+  transition: transform 0.5s ease-in;
+}
+
+.summary.show {
+  transform: translateY(0); /* Final position */
+}
+
+.summary-background.hide {
+  display: none;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 5% auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.restart-button {
+  background: #31304d;
+  color: #b6bbc4;
+  outline: none;
+  display: flex;
+  margin: auto;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 40%;
+  margin: 5% auto;
+}
+
+.table-row {
+  width: 100%;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  margin: 5%;
+}
+
+.not-active input {
+  pointer-events: none;
+}
+
+.block-input {
+  width: 30px;
+  height: 30px;
+  border: solid 1px #b6bbc4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+input {
+  background: transparent;
+  border: none;
+  width: 30px;
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
